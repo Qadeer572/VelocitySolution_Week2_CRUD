@@ -56,7 +56,7 @@ ROOT_URLCONF = 'VelocitySolution_Week2_CRUD.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates/'],  # corrected: now it's a list
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +68,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'VelocitySolution_Week2_CRUD.wsgi.application'
 
