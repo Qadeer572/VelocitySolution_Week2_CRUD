@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
+    'users',
     'rest_framework',
 ]
 
@@ -76,12 +77,18 @@ WSGI_APPLICATION = 'VelocitySolution_Week2_CRUD.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# 
+
+from mongoengine import connect
+
+connect(
+    db='QadeerDataBase',
+    host='localhost',
+    port=27017
+)
+
+
+
 
 
 # Password validation
