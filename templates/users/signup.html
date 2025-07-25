@@ -746,7 +746,7 @@
 
                         <div class="login-link">
                             Already have an account? 
-                            <a href="#" onclick="goToLogin()">Sign in here</a>
+                            <a href="/users/login" onclick="goToLogin()">Sign in here</a>
                         </div>
                     </div>
                 </div>
@@ -963,7 +963,7 @@
                         
                         const data = await response.json();
                         
-                        if (response.ok) {
+                        if (data.status) {
                             document.getElementById('signupForm').style.display = 'none';
                             document.getElementById('successMessage').style.display = 'block';
                             document.getElementById('socialDivider').style.display = 'none';
@@ -972,7 +972,7 @@
                             // Display error message near the submit button
                             const errorDiv = document.createElement('div');
                             errorDiv.className = 'invalid-feedback d-block text-center';
-                            errorDiv.textContent = data.message || 'Failed to create account. Please try again.';
+                            errorDiv.textContent = data.error || 'Failed to create account. Please try again.';
                             document.getElementById('signupForm').appendChild(errorDiv);
                             setTimeout(() => errorDiv.remove(), 5000); // Remove error after 5 seconds
                         }
@@ -995,7 +995,7 @@
             }
 
             function goToLogin() {
-                window.location.href = '/login';
+                window.location.href = '/users/login/';
             }
 
             function showTerms() {

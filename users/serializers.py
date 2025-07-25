@@ -5,3 +5,8 @@ class registerSerializer(serializers.Serializer):
     firstName = serializers.CharField(max_length=100)
     lastName = serializers.CharField(max_length=100)
     password = serializers.CharField(write_only=True)
+
+
+class loginSerilaizer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
