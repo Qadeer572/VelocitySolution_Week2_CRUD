@@ -21,6 +21,11 @@ def login_View(request):
 def register_View(request):
         return render(request, 'users/signup.html')
 
+def dashboard_view(request):
+      
+            return render(request, 'users/dashboard.html')
+      
+
 class register_api(APIView):
         
         def post(self,request):

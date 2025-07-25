@@ -522,7 +522,7 @@
         }
 
         // Form validation and submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
@@ -549,6 +549,15 @@
             loadingSpinner.style.display = 'inline-block';
             loginButtonText.innerHTML = '<span>Signing In...</span>';
             
+            const res= await fetch('/users/login_api/',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            })
+
+            const data = await res.json();
             // Simulate login process
             setTimeout(() => {
                 // Hide loading state
@@ -556,13 +565,12 @@
                 loginButtonText.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Sign In';
                 
                 // Simulate successful login
-                if (email === 'demo@commhub.com' && password === 'demo123') {
+                if (data.status) {
+                    localStorage.setItem('token', data.token);
                     // Success animation
                     loginButtonText.innerHTML = '<i class="fas fa-check me-2"></i>Welcome Back!';
                     setTimeout(() => {
-                        alert('🎉 Login successful! Redirecting to dashboard...');
-                        // In real app, redirect to dashboard
-                        // window.location.href = '/dashboard';
+                        window.location.href = '/users/dashboard/'; // Redirect to dashboard
                     }, 1000);
                 } else {
                     showError('Invalid email or password. Try demo@commhub.com / demo123');
