@@ -11,6 +11,8 @@ import bcrypt
 import jwt
 import datetime
 from VelocitySolution_Week2_CRUD.settings import SECRET_KEY
+from rest_framework.permissions import IsAuthenticated
+
 
 
  
@@ -22,10 +24,8 @@ def register_View(request):
         return render(request, 'users/signup.html')
 
 def dashboard_view(request):
+        return render(request, 'users/dashboard.html')
       
-            return render(request, 'users/dashboard.html')
-      
-
 class register_api(APIView):
         
         def post(self,request):
@@ -102,3 +102,14 @@ class login_api(APIView):
              "status": False,
               "errors":serializer.errors
               }, status=400)
+
+
+class contact(APIView):
+      permission_classes=[IsAuthenticated]
+
+      def get(self,request):
+            users= person_collection.find()
+            return Response({
+                "status": True,
+                "data": list(users)
+            })
